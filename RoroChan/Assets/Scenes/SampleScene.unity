@@ -512,6 +512,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1514904993
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1514904994}
+  m_Layer: 0
+  m_Name: StartingPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1514904994
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1514904993}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2, y: 3, z: -1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1695934651
 GameObject:
   m_ObjectHideFlags: 0
@@ -543,6 +574,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37b9e481df64b92408cf431b48307afb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  movementCounterText: {fileID: 1775619785}
+  movementCounter: 0
+  isDead: 0
+  startingPoint: {fileID: 1514904994}
+  ReadyToMove: 0
 --- !u!212 &1695934653
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -750,6 +786,7 @@ GameObject:
   - component: {fileID: 1775619784}
   - component: {fileID: 1775619786}
   - component: {fileID: 1775619785}
+  - component: {fileID: 1775619787}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -873,6 +910,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1775619783}
   m_CullTransparentMesh: 1
+--- !u!114 &1775619787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1775619783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4cfc9aae28ca2849975a5e57623b622, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementCounter: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -883,3 +933,4 @@ SceneRoots:
   - {fileID: 1695934654}
   - {fileID: 392571110}
   - {fileID: 114395985}
+  - {fileID: 1514904994}
