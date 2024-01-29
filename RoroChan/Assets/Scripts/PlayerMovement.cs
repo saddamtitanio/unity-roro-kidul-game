@@ -26,6 +26,8 @@ public class PlayerMovement : MonoBehaviour
     private GameObject[] ObjToPush;
     private GameObject[] traps;
 
+    bool isBlock = false;
+
 
     // Start is called before the first frame update
     void Start()
@@ -86,7 +88,12 @@ public class PlayerMovement : MonoBehaviour
         origPos = transform.position;
         targetPos = origPos + direction;
 
-        GameObject objectDetected = checkObj(targetPos);
+        GameObject objectDetected = checkObjCanMove(targetPos);
+
+        isBlock = false;
+
+        Debug.Log(isBlock);
+
         if (objectDetected != null)
         {
             Vector3 obstacleOrigPos = objectDetected.transform.position;
@@ -124,7 +131,22 @@ public class PlayerMovement : MonoBehaviour
         isMoving = false;
     }
 
-    public GameObject checkObj(Vector3 targetPos)
+    public bool isBlocked(Vector3 targetPos)
+    {
+        foreach (var obj in ObjToPush)
+        {
+            if (obj.transform.position == targetPos)
+            {
+                isBlock = true;
+                return true;
+            }
+        }
+
+        isBlock = false;
+        return false;
+    }
+
+    public GameObject checkObjCanMove(Vector3 targetPos)
     {
         foreach (var obj in ObjToPush)
         {
