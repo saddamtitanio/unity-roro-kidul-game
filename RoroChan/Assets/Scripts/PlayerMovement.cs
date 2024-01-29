@@ -76,6 +76,7 @@ public class PlayerMovement : MonoBehaviour
             spriteRenderer.flipX = true;
             movementCounter = 23;
         }
+        Debug.Log("TEST");
     }
 
     private IEnumerator MovePlayer(Vector3 direction)
