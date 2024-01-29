@@ -28,6 +28,11 @@ public class UpdateCounter : MonoBehaviour
             {
                 movementCounterText.text = "X";
             }
+
+            if (movementCounter < 0) 
+            {
+                movementCounterText.text = "23";
+            }
         }
     }
 }

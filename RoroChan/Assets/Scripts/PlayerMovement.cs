@@ -24,8 +24,7 @@ public class PlayerMovement : MonoBehaviour
     private Transform startingPoint;
 
     private GameObject[] ObjToPush;
-
-    public bool ReadyToMove;
+    private GameObject[] traps;
 
 
     // Start is called before the first frame update
@@ -37,6 +36,7 @@ public class PlayerMovement : MonoBehaviour
         transform.position = startingPoint.transform.position;
 
         ObjToPush = GameObject.FindGameObjectsWithTag("ObjToPush");
+        traps = GameObject.FindGameObjectsWithTag("Trap");
     }
 
     // Update is called once per frame
@@ -69,27 +69,41 @@ public class PlayerMovement : MonoBehaviour
             movementCounter--;
         }
 
-        if (movementCounter < 0)
+/*        if (movementCounter < 0)
         {
-            StopAllCoroutines();
             transform.position = startingPoint.transform.position;
             spriteRenderer.flipX = true;
             movementCounter = 23;
-        }
-        Debug.Log("TEST");
+        }*/
     }
 
     private IEnumerator MovePlayer(Vector3 direction)
     {
-        if (!isDead)
+        isMoving = true;
+
+        float elapsedTime = 0;
+
+        origPos = transform.position;
+        targetPos = origPos + direction;
+
+        GameObject objectDetected = checkObj(targetPos);
+        if (objectDetected != null)
         {
-            isMoving = true;
+            Vector3 obstacleOrigPos = objectDetected.transform.position;
+            Vector3 targetObstaclePos = obstacleOrigPos + direction;
 
-            float elapsedTime = 0;
+            while (elapsedTime < timeToMove)
+            {
+                objectDetected.transform.position = Vector3.Lerp(obstacleOrigPos, targetObstaclePos, (elapsedTime / 0.1f));
+                elapsedTime += Time.deltaTime;
+                yield return null;
+            }
 
-            origPos = transform.position;
-            targetPos = origPos + direction;
-
+            objectDetected.transform.position = targetObstaclePos;
+        }
+        else
+        {
+            checkTraps(targetPos);
             while (elapsedTime < timeToMove)
             {
                 transform.position = Vector3.Lerp(origPos, targetPos, (elapsedTime / timeToMove));
@@ -98,31 +112,39 @@ public class PlayerMovement : MonoBehaviour
             }
 
             transform.position = targetPos;
-
-            isMoving = false;
         }
+
+        if (movementCounter < 0)
+        {
+            movementCounter = 23;
+            transform.position = startingPoint.transform.position;
+            spriteRenderer.flipX = true;
+        }
+
+        isMoving = false;
     }
 
-    public bool Move(Vector2 direction)
+    public GameObject checkObj(Vector3 targetPos)
     {
-        if (Mathf.Abs(direction.x) < 0.5)
+        foreach (var obj in ObjToPush)
         {
-            direction.x = 0;
+            if (obj.transform.position == targetPos)
+            {
+                return obj;
+            }
         }
-        else
-        {
-            direction.y = 0;
-        }
-        direction.Normalize();
+        return null;
+    }
 
-        if (Blocked(transform.position, direction))
+    public void checkTraps(Vector3 targetPos)
+    {
+        foreach (var trap in traps)
         {
-            return false;
-        }
-        else
-        {
-            transform.Translate(direction);
-            return true;
+            if (trap.transform.position == targetPos)
+            {
+                movementCounter--;
+                break;
+            }
         }
     }
 
