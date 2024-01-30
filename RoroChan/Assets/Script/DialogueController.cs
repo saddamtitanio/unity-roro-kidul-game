@@ -5,17 +5,6 @@ using TMPro;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 
-[System.Serializable]
-public class DialogueLine
-{
-    public string speakerName;
-    [TextArea(3, 10)]
-    public string text;
-    public bool isChoice;
-    public string rightChoiceText;
-    public string wrongChoiceText;
-}
-
 public class DialogueController : MonoBehaviour
 {
     public TextMeshProUGUI speakerNameText;
@@ -24,7 +13,20 @@ public class DialogueController : MonoBehaviour
     public float fadeInSpeed = 1.5f;
     public float fadeOutSpeed = 1.5f;
     public string nextScene;
-    public string GameOver;
+    public string gameOverScene;
+
+    [System.Serializable]
+    public class DialogueLine
+    {
+        public string speakerName;
+        [TextArea(3, 10)]
+        public string text;
+        public bool isChoice;
+        public string rightChoiceText;
+        public string wrongChoiceText;
+        public Color speakerColor; // New property for speaker color
+        public float speakerNamePosX = 0f; // New property for X position
+    }
 
     [FormerlySerializedAs("dialogueLines")]
     public DialogueLine[] dialogue;
@@ -35,9 +37,7 @@ public class DialogueController : MonoBehaviour
 
     void Start()
     {
-        speakerNameText.alpha = 0f;
-        dialogueText.alpha = 0f;
-        choicesText.alpha = 0f;
+        InitializeUI();
     }
 
     void Update()
@@ -48,16 +48,33 @@ public class DialogueController : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.Space) && !isAnimating)
         {
-            if (currentLineIndex < dialogue.Length)
+            ProcessDialogueInput();
+        }
+    }
+
+    void InitializeUI()
+    {
+        SetUIAlpha(0f);
+    }
+
+    void SetUIAlpha(float alpha)
+    {
+        speakerNameText.alpha = alpha;
+        dialogueText.alpha = alpha;
+        choicesText.alpha = alpha;
+    }
+
+    void ProcessDialogueInput()
+    {
+        if (currentLineIndex < dialogue.Length)
+        {
+            if (dialogue[currentLineIndex].isChoice)
             {
-                if (dialogue[currentLineIndex].isChoice)
-                {
-                    StartCoroutine(HandleChoiceWithFade());
-                }
-                else
-                {
-                    StartCoroutine(ContinueDialogue());
-                }
+                StartCoroutine(HandleChoiceWithFade());
+            }
+            else
+            {
+                StartCoroutine(ContinueDialogue());
             }
         }
     }
@@ -66,59 +83,62 @@ public class DialogueController : MonoBehaviour
     {
         isDialogueTriggered = true;
 
-        SetSpeakerName(dialogue[currentLineIndex].speakerName);
-        SetDialogueText(dialogue[currentLineIndex].text);
+        SetSpeakerAndText(dialogue[currentLineIndex].speakerName, dialogue[currentLineIndex].text, dialogue[currentLineIndex].speakerColor, dialogue[currentLineIndex].speakerNamePosX);
         SetChoicesText("");
 
         isAnimating = true;
-        while (speakerNameText.alpha < 1f || dialogueText.alpha < 1f)
-        {
-            speakerNameText.alpha += Time.deltaTime * fadeInSpeed;
-            dialogueText.alpha += Time.deltaTime * fadeInSpeed;
-            yield return null;
-        }
+        yield return StartCoroutine(FadeInUI());
         isAnimating = false;
     }
 
     IEnumerator ContinueDialogue()
     {
         isAnimating = true;
-        while (speakerNameText.alpha > 0f || dialogueText.alpha > 0f)
-        {
-            speakerNameText.alpha -= Time.deltaTime * fadeOutSpeed;
-            dialogueText.alpha -= Time.deltaTime * fadeOutSpeed;
-            yield return null;
-        }
 
+        yield return StartCoroutine(FadeOutUI());
+
+        MoveToNextLineOrScene();
+
+        yield return StartCoroutine(FadeInUI());
+
+        isAnimating = false;
+    }
+
+    void MoveToNextLineOrScene()
+    {
         currentLineIndex++;
         if (currentLineIndex < dialogue.Length)
         {
-            SetSpeakerName(dialogue[currentLineIndex].speakerName);
-            SetDialogueText(dialogue[currentLineIndex].text);
+            SetSpeakerAndText(dialogue[currentLineIndex].speakerName, dialogue[currentLineIndex].text, dialogue[currentLineIndex].speakerColor, dialogue[currentLineIndex].speakerNamePosX);
         }
         else
         {
             Debug.Log("End of dialogue!");
 
-            // Transition to the next scene after the last dialogue
             if (!string.IsNullOrEmpty(nextScene))
             {
                 SceneManager.LoadScene(nextScene);
             }
         }
-
-        while (speakerNameText.alpha < 1f || dialogueText.alpha < 1f)
-        {
-            speakerNameText.alpha += Time.deltaTime * fadeInSpeed;
-            dialogueText.alpha += Time.deltaTime * fadeInSpeed;
-            yield return null;
-        }
-        isAnimating = false;
     }
 
-    void SetSpeakerName(string name)
+    void SetSpeakerAndText(string name, string text, Color color, float posX)
+    {
+        SetSpeakerName(dialogue[currentLineIndex].speakerName, dialogue[currentLineIndex].speakerColor, dialogue[currentLineIndex].speakerNamePosX);
+
+        SetDialogueText(text);
+    }
+
+    void SetSpeakerName(string name, Color color, float posX)
     {
         speakerNameText.text = name;
+        speakerNameText.color = color;
+
+        // Get the RectTransform component of the speakerNameText
+        RectTransform rectTransform = speakerNameText.GetComponent<RectTransform>();
+
+        // Set anchored position based on X position
+        rectTransform.anchoredPosition = new Vector2(posX, rectTransform.anchoredPosition.y);
     }
 
     void SetDialogueText(string text)
@@ -145,8 +165,7 @@ public class DialogueController : MonoBehaviour
 
     IEnumerator HandleChoiceWithFade()
     {
-        SetChoicesText("1. " + dialogue[currentLineIndex].rightChoiceText + "\n" +
-                        "2. " + dialogue[currentLineIndex].wrongChoiceText);
+        SetChoicesText($"1. {dialogue[currentLineIndex].rightChoiceText}\n2. {dialogue[currentLineIndex].wrongChoiceText}");
 
         yield return StartCoroutine(WaitForChoiceInput());
 
@@ -154,25 +173,51 @@ public class DialogueController : MonoBehaviour
     }
 
     IEnumerator WaitForChoiceInput()
+{
+    bool validInput = false;
+
+    while (!validInput)
     {
-        while (!Input.GetKeyDown(KeyCode.Alpha1) && !Input.GetKeyDown(KeyCode.Alpha2))
+        if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            yield return null;
-        }
-
-        int chosenOption = Input.GetKeyDown(KeyCode.Alpha1) ? 1 : 2;
-
-        if (chosenOption == 1)
-        {
+            validInput = true;
             StartCoroutine(ContinueDialogue());
         }
-        else
+        else if (Input.GetKeyDown(KeyCode.DownArrow))
         {
-            if (!string.IsNullOrEmpty(GameOver))
+            validInput = true;
+            if (!string.IsNullOrEmpty(gameOverScene))
             {
-                SceneManager.LoadScene(GameOver);
+                SceneManager.LoadScene(gameOverScene);
             }
         }
+
+        yield return null;
     }
 }
 
+
+    IEnumerator FadeInUI()
+    {
+        float targetAlpha = 1f;
+
+        while (speakerNameText.alpha < targetAlpha || dialogueText.alpha < targetAlpha)
+        {
+            speakerNameText.alpha += Time.deltaTime * fadeInSpeed;
+            dialogueText.alpha += Time.deltaTime * fadeInSpeed;
+            yield return null;
+        }
+    }
+
+    IEnumerator FadeOutUI()
+    {
+        float targetAlpha = 0f;
+
+        while (speakerNameText.alpha > targetAlpha || dialogueText.alpha > targetAlpha)
+        {
+            speakerNameText.alpha -= Time.deltaTime * fadeOutSpeed;
+            dialogueText.alpha -= Time.deltaTime * fadeOutSpeed;
+            yield return null;
+        }
+    }
+}
