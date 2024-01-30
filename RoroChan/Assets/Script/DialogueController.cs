@@ -16,7 +16,7 @@ public class DialogueLine
     public string wrongChoiceText;
 }
 
-public class Dialogue1 : MonoBehaviour
+public class DialogueController : MonoBehaviour
 {
     public TextMeshProUGUI speakerNameText;
     public TextMeshProUGUI dialogueText;
@@ -24,6 +24,7 @@ public class Dialogue1 : MonoBehaviour
     public float fadeInSpeed = 1.5f;
     public float fadeOutSpeed = 1.5f;
     public string nextScene;
+    public string GameOver;
 
     [FormerlySerializedAs("dialogueLines")]
     public DialogueLine[] dialogue;
@@ -98,6 +99,8 @@ public class Dialogue1 : MonoBehaviour
         else
         {
             Debug.Log("End of dialogue!");
+
+            // Transition to the next scene after the last dialogue
             if (!string.IsNullOrEmpty(nextScene))
             {
                 SceneManager.LoadScene(nextScene);
@@ -144,7 +147,9 @@ public class Dialogue1 : MonoBehaviour
     {
         SetChoicesText("1. " + dialogue[currentLineIndex].rightChoiceText + "\n" +
                         "2. " + dialogue[currentLineIndex].wrongChoiceText);
+
         yield return StartCoroutine(WaitForChoiceInput());
+
         SetChoicesText("");
     }
 
@@ -154,17 +159,20 @@ public class Dialogue1 : MonoBehaviour
         {
             yield return null;
         }
+
         int chosenOption = Input.GetKeyDown(KeyCode.Alpha1) ? 1 : 2;
+
         if (chosenOption == 1)
         {
             StartCoroutine(ContinueDialogue());
         }
         else
         {
-            if (!string.IsNullOrEmpty(nextScene))
+            if (!string.IsNullOrEmpty(GameOver))
             {
-                SceneManager.LoadScene(nextScene);
+                SceneManager.LoadScene(GameOver);
             }
         }
     }
 }
+

@@ -182,8 +182,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Dialogue
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: eede6dfe33ec93240821ab44b76b7035, type: 2}
-  m_sharedMaterial: {fileID: 6953546729798584379, guid: eede6dfe33ec93240821ab44b76b7035, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: d3ab1328aeb5740429c1a181b5abe83b, type: 2}
+  m_sharedMaterial: {fileID: 6002505112813315719, guid: d3ab1328aeb5740429c1a181b5abe83b, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -217,7 +217,7 @@ MonoBehaviour:
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
-  m_characterSpacing: 0
+  m_characterSpacing: 20
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -257,6 +257,73 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6877217}
   m_CullTransparentMesh: 1
+--- !u!1 &51848428
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 51848430}
+  - component: {fileID: 51848429}
+  m_Layer: 0
+  m_Name: DialogueController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &51848429
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 51848428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86fcf3b0214695f4cb9eb7d077c9d14a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speakerNameText: {fileID: 1541584322}
+  dialogueText: {fileID: 6877219}
+  choicesText: {fileID: 2088532497}
+  fadeInSpeed: 1.5
+  fadeOutSpeed: 1.5
+  nextScene: Next
+  GameOver: GameOver
+  dialogue:
+  - speakerName: TEST
+    text: TEST1
+    isChoice: 0
+    rightChoiceText: 
+    wrongChoiceText: 
+  - speakerName: TEST
+    text: TEST2
+    isChoice: 1
+    rightChoiceText: Bener
+    wrongChoiceText: Salah
+  - speakerName: TEST
+    text: TEST3
+    isChoice: 0
+    rightChoiceText: 
+    wrongChoiceText: 
+--- !u!4 &51848430
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 51848428}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.67888093, y: 0.12787114, z: -3.8485599}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &191876957
 GameObject:
   m_ObjectHideFlags: 0
@@ -325,8 +392,8 @@ Canvas:
   m_GameObject: {fileID: 191876957}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_RenderMode: 1
+  m_Camera: {fileID: 287555520}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -642,72 +709,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1503658746
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1503658748}
-  - component: {fileID: 1503658749}
-  m_Layer: 0
-  m_Name: DialogueController
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1503658748
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1503658746}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 419, y: 240, z: -5.3827515}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1503658749
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1503658746}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4fdc3a7aded101441b5bbc0b2f4f74bb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speakerNameText: {fileID: 1541584322}
-  dialogueText: {fileID: 6877219}
-  choicesText: {fileID: 2088532497}
-  fadeInSpeed: 1.5
-  fadeOutSpeed: 1.5
-  nextScene: Next
-  dialogue:
-  - speakerName: Cheerfull Girl
-    text: Hi baby
-    isChoice: 0
-    rightChoiceText: 
-    wrongChoiceText: 
-  - speakerName: Cheerfull Girl
-    text: TESSSSST
-    isChoice: 1
-    rightChoiceText: BENER
-    wrongChoiceText: SALAH
-  - speakerName: Cheerfull Girl
-    text: YEY
-    isChoice: 0
-    rightChoiceText: 
-    wrongChoiceText: 
 --- !u!1 &1541584320
 GameObject:
   m_ObjectHideFlags: 0
@@ -767,8 +768,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Name
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: eede6dfe33ec93240821ab44b76b7035, type: 2}
-  m_sharedMaterial: {fileID: 6953546729798584379, guid: eede6dfe33ec93240821ab44b76b7035, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: d3ab1328aeb5740429c1a181b5abe83b, type: 2}
+  m_sharedMaterial: {fileID: 6002505112813315719, guid: d3ab1328aeb5740429c1a181b5abe83b, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -802,7 +803,7 @@ MonoBehaviour:
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
-  m_characterSpacing: 0
+  m_characterSpacing: 20
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -903,8 +904,8 @@ MonoBehaviour:
 
     Choice'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: eede6dfe33ec93240821ab44b76b7035, type: 2}
-  m_sharedMaterial: {fileID: 6953546729798584379, guid: eede6dfe33ec93240821ab44b76b7035, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: d3ab1328aeb5740429c1a181b5abe83b, type: 2}
+  m_sharedMaterial: {fileID: 6002505112813315719, guid: d3ab1328aeb5740429c1a181b5abe83b, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -983,6 +984,6 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 287555521}
-  - {fileID: 1503658748}
   - {fileID: 191876961}
   - {fileID: 1232229499}
+  - {fileID: 51848430}
