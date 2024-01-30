@@ -8,4 +8,28 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
+  - enabled: 1
+    path: Assets/Scenes/NPC1.unity
+    guid: 670ee717fcfb2d3458b0ab0ca47eabe4
+  - enabled: 1
+    path: Assets/Scenes/Bridge1.unity
+    guid: a6ac9740c719faf4d8d7424000ee852c
+  - enabled: 1
+    path: Assets/Scenes/NPC2.unity
+    guid: cef8dcea134d71a4991def5ce12314c5
+  - enabled: 1
+    path: Assets/Scenes/Bridge2.unity
+    guid: 1a3c53748ca73454b8d1f196a79538f6
+  - enabled: 1
+    path: Assets/Scenes/NPC3.unity
+    guid: 123c447b5216a5242940f89ade7c93de
+  - enabled: 1
+    path: Assets/Scenes/Bridge3.unity
+    guid: 50f98d05a0ecf1341a7f182c786c55cf
+  - enabled: 1
+    path: Assets/Scenes/NPC4.unity
+    guid: 186737fb7eb72904380723d01c4e4d91
+  - enabled: 1
+    path: Assets/Scenes/NPC5.unity
+    guid: 4acb57ff0ea170148b251520f9e33d41
   m_configObjects: {}
