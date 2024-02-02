@@ -3,81 +3,207 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Tilemaps;
+using UnityEngine.SceneManagement;
+
 
 public class PlayerMovement : MonoBehaviour
 {
-    private bool isMoving;
+    private bool isMoving, isSliding;
     private Vector3 origPos, targetPos;
     private float timeToMove = 0.15f;
+    private float slidingTime = 0.3f;
 
     private SpriteRenderer spriteRenderer;
 
-    public TMP_Text movementCounterText;
-
     [HideInInspector]
     public int movementCounter;
-
-    [HideInInspector]
-    public bool isDead;
 
     [SerializeField]
     private Transform startingPoint;
 
     private GameObject[] ObjToPush;
-    private GameObject[] traps;
 
-    bool isBlock = false;
+    private Vector3 moveToPosition;
+
+    public Tilemap[] obstacles;
+    public Tilemap waterTilemap;
+    public Tilemap trapTilemap;
+    public Tilemap destinationTilemap;
+
+    public Animator anim;
+
+    Vector3 moveDirection;
+
+    private bool isTrapped = false;
+
 
 
     // Start is called before the first frame update
     void Start()
     {
-        movementCounter = int.Parse(movementCounterText.text);
+        ResetState initialCounter = FindObjectOfType<ResetState>();
+        Scene scene = initialCounter.scene;
+
+        movementCounter = initialCounter.sceneMovementCounters[scene.name];
+
         spriteRenderer = GetComponent<SpriteRenderer>();
 
         transform.position = startingPoint.transform.position;
 
         ObjToPush = GameObject.FindGameObjectsWithTag("ObjToPush");
-        traps = GameObject.FindGameObjectsWithTag("Trap");
+
     }
 
     // Update is called once per frame
     void Update()
     {
-
-        if ((Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) && !isMoving)
+        if (isTrapped)
         {
-            StartCoroutine(MovePlayer(Vector3.up));
-            movementCounter--;
+            if ((Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) || (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)) ||
+                (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) || (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)))
+            {
+                isTrapped = false;
+                isSliding = false;
+
+                if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
+                {
+                    moveDirection = Vector3.up;
+                }
+                if (Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
+                {
+                    moveDirection = Vector3.down;
+                }
+                if (Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
+                {
+                    spriteRenderer.flipX = false;
+                    moveDirection = Vector3.right;
+                }
+                if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
+                {
+                    spriteRenderer.flipX = true;
+                    moveDirection = Vector3.left;
+                }
+
+                movementCounter--;
+                anim.SetBool("isMoving", true);
+                StartCoroutine(StopMovingAnimation());
+
+                StartCoroutine(SlidePlayer(moveDirection));
+            }
         }
 
-        if ((Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)) && !isMoving)
+        if (isInWater() && !isSliding && !isTrapped)
         {
-            StartCoroutine(MovePlayer(Vector3.down));
-            movementCounter--;
+            if (!isTrap(moveDirection))
+            {
+                if (checkImmovableObj(transform.position, moveDirection))
+                {
+                    StartCoroutine(SlidePlayer(moveDirection));
+                }
+            }
+
         }
 
-        if ((Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) && !isMoving)
+        if ((Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)) && !isMoving && !isSliding)
         {
-            spriteRenderer.flipX = true;
-            StartCoroutine(MovePlayer(Vector3.left));
-            movementCounter--;
+            moveDirection = Vector3.up;
+
+            if (checkImmovableObj(transform.position, moveDirection))
+            {
+                StartCoroutine(MovePlayer(moveDirection));
+                movementCounter--;
+            }
         }
 
-        if ((Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) && !isMoving)
+        if ((Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)) && !isMoving && !isSliding)
         {
-            spriteRenderer.flipX = false;
-            StartCoroutine(MovePlayer(Vector3.right));
-            movementCounter--;
+            moveDirection = Vector3.down;
+
+            if (checkImmovableObj(transform.position, Vector3.down))
+            {
+                StartCoroutine(MovePlayer(Vector3.down));
+                movementCounter--;
+            }
         }
 
-/*        if (movementCounter < 0)
+        if ((Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)) && !isMoving && !isSliding)
         {
-            transform.position = startingPoint.transform.position;
-            spriteRenderer.flipX = true;
-            movementCounter = 23;
-        }*/
+            moveDirection = Vector3.left;
+
+            if (checkImmovableObj(transform.position, Vector3.left))
+            {
+                spriteRenderer.flipX = true;
+                StartCoroutine(MovePlayer(Vector3.left));
+                movementCounter--;
+            }
+        }
+
+        if ((Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)) && !isMoving && !isSliding)
+        {
+            moveDirection = Vector3.right;
+
+            if (checkImmovableObj(transform.position, Vector3.right))
+            {
+                spriteRenderer.flipX = false;
+                StartCoroutine(MovePlayer(Vector3.right));
+                movementCounter--;
+            }
+        }
+
+        isPlayerDead();
+        isDestinationReached();
     }
+
+    private IEnumerator StopMovingAnimation()
+    {
+        yield return new WaitForSeconds(0.2f);
+        anim.SetBool("isMoving", false);
+    }
+
+    private IEnumerator SlidePlayer(Vector3 direction)
+    {
+        isSliding = true;
+
+        float elapsedTime = 0f;
+
+        checkTraps(direction);
+
+        Vector3 origPos = transform.position;
+        Vector3 targetPos = origPos + direction;
+
+        while (elapsedTime < slidingTime)
+        {
+            transform.position = Vector3.Lerp(origPos, targetPos, (elapsedTime / slidingTime));
+            elapsedTime += Time.deltaTime;
+
+            if (isTrap(direction))
+            {
+                transform.position = targetPos + direction;
+
+                isTrapped = true;
+
+                isPlayerDead();
+
+                yield break;
+            }
+
+            yield return null;
+
+        }
+
+        transform.position = targetPos;
+
+        if (movementCounter < 0)
+        {
+            StopCoroutine(SlidePlayer(direction));
+        }
+        isPlayerDead();
+
+        isSliding = false;
+    }
+
+
 
     private IEnumerator MovePlayer(Vector3 direction)
     {
@@ -88,107 +214,165 @@ public class PlayerMovement : MonoBehaviour
         origPos = transform.position;
         targetPos = origPos + direction;
 
-        GameObject objectDetected = checkObjCanMove(targetPos);
-
-        isBlock = false;
-
-        Debug.Log(isBlock);
+        GameObject objectDetected = pushableObject(targetPos, direction);
 
         if (objectDetected != null)
         {
-            Vector3 obstacleOrigPos = objectDetected.transform.position;
-            Vector3 targetObstaclePos = obstacleOrigPos + direction;
+            anim.SetBool("isPush", true);
 
-            while (elapsedTime < timeToMove)
+            if (!checkAdjacentObj(objectDetected, direction) && checkImmovableObj(objectDetected.transform.position, direction))
             {
-                objectDetected.transform.position = Vector3.Lerp(obstacleOrigPos, targetObstaclePos, (elapsedTime / 0.1f));
-                elapsedTime += Time.deltaTime;
-                yield return null;
-            }
+                Vector3 obstacleOrigPos = objectDetected.transform.position;
+                Vector3 targetObstaclePos = obstacleOrigPos + direction;
 
-            objectDetected.transform.position = targetObstaclePos;
+                while (elapsedTime < timeToMove)
+                {
+                    objectDetected.transform.position = Vector3.Lerp(obstacleOrigPos, targetObstaclePos, (elapsedTime / 0.2f));
+                    elapsedTime += Time.deltaTime;
+                    yield return null;
+                }
+                objectDetected.transform.position = targetObstaclePos;
+            }
+            isPlayerDead();
+            checkTraps(Vector3.zero);
         }
         else
         {
-            checkTraps(targetPos);
+            checkTraps(direction);
+
+            anim.SetBool("isMoving", true);
+
             while (elapsedTime < timeToMove)
             {
                 transform.position = Vector3.Lerp(origPos, targetPos, (elapsedTime / timeToMove));
                 elapsedTime += Time.deltaTime;
                 yield return null;
             }
-
             transform.position = targetPos;
         }
 
         if (movementCounter < 0)
         {
-            movementCounter = 23;
-            transform.position = startingPoint.transform.position;
-            spriteRenderer.flipX = true;
+            StopCoroutine(MovePlayer(direction));
         }
+
+        isPlayerDead();
+
+        yield return new WaitForSeconds(0.15f);
+
+        anim.SetBool("isPush", false);
+        anim.SetBool("isMoving", false);
 
         isMoving = false;
     }
 
-    public bool isBlocked(Vector3 targetPos)
+    void isPlayerDead()
     {
-        foreach (var obj in ObjToPush)
-        {
-            if (obj.transform.position == targetPos)
-            {
-                isBlock = true;
-                return true;
-            }
-        }
+        ResetState initialCounter = FindObjectOfType<ResetState>();
+        Scene scene = initialCounter.scene;
 
-        isBlock = false;
-        return false;
+        if (movementCounter < 0)
+        {
+            movementCounter = initialCounter.sceneMovementCounters[scene.name];
+            anim.SetBool("isMoving", false);
+            transform.position = startingPoint.transform.position;
+            spriteRenderer.flipX = true;
+        }
     }
 
-    public GameObject checkObjCanMove(Vector3 targetPos)
+    private GameObject pushableObject(Vector3 targetPos, Vector3 direction)
     {
         foreach (var obj in ObjToPush)
         {
-            if (obj.transform.position == targetPos)
+            if (Vector2.Distance(obj.transform.position, targetPos) < 0.5f)
             {
+                isPlayerDead();
                 return obj;
             }
         }
         return null;
     }
 
-    public void checkTraps(Vector3 targetPos)
+    bool checkAdjacentObj(GameObject pushedObject, Vector3 direction)
     {
-        foreach (var trap in traps)
+        foreach (var obj in ObjToPush)
         {
-            if (trap.transform.position == targetPos)
+            if (obj != pushedObject)
             {
-                movementCounter--;
-                break;
-            }
-        }
-    }
-
-    public bool Blocked(Vector3 position, Vector2 direction)
-    {
-        Vector2 newpos = new Vector2(position.x, position.y) + direction;
-
-        foreach (var objToPush in ObjToPush)
-        {
-            if (objToPush.transform.position.x == newpos.x && objToPush.transform.position.y == newpos.y)
-            {
-                Push objPush = objToPush.GetComponent<Push>();
-
-                if (objToPush && objPush.Move(direction))
+                if (Vector2.Distance(pushedObject.transform.position + direction, obj.transform.position) < 0.5f)
                 {
-                    return false;
-                }
-                else
-                {
+                    isPlayerDead();
                     return true;
                 }
             }
+        }
+        return false;
+    }
+
+
+    bool checkImmovableObj(Vector3 position, Vector3 direction)
+    {
+        moveToPosition = position + direction;
+
+        foreach (Tilemap obstacle in obstacles)
+        {
+            Vector3Int obstacleMap = obstacle.WorldToCell(moveToPosition - new Vector3(0, 0.5f, 0));
+
+            if (obstacle.GetTile(obstacleMap) != null)
+            {
+                isPlayerDead();
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private bool isInWater()
+    {
+        Vector3Int playerCellPosition = trapTilemap.WorldToCell(transform.position);
+
+        if (waterTilemap.HasTile(playerCellPosition))
+        {
+            isPlayerDead();
+            return true;
+        }
+        return false;
+
+    }
+
+    private bool isTrap(Vector3 direction)
+    {
+        Vector3Int playerCellPosition = trapTilemap.WorldToCell(transform.position);
+
+        if (trapTilemap.HasTile(playerCellPosition))
+        {
+            isPlayerDead();
+            movementCounter--;
+            return true;
+        }
+        return false;
+    }
+
+    private void checkTraps(Vector3 direction)
+    {
+        Vector3Int playerCellPosition = trapTilemap.WorldToCell(transform.position + direction);
+
+        if (trapTilemap.HasTile(playerCellPosition))
+        {
+            isPlayerDead();
+            DamageEffect damage = GetComponent<DamageEffect>();
+            damage.Flash();
+            movementCounter--;
+        }
+    }
+
+    private bool isDestinationReached()
+    {
+        Vector3Int playerCellPosition = destinationTilemap.WorldToCell(transform.position);
+
+        if (destinationTilemap.HasTile(playerCellPosition))
+        {
+            return true;
         }
         return false;
     }

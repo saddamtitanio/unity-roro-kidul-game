@@ -11,6 +11,7 @@ public class UpdateCounter : MonoBehaviour
     void Start()
     {
         movementCounterText = GetComponent<TMP_Text>();
+        movementCounter = int.Parse(movementCounterText.text);
     }
 
     // Update is called once per frame
@@ -31,7 +32,7 @@ public class UpdateCounter : MonoBehaviour
 
             if (movementCounter < 0) 
             {
-                movementCounterText.text = "23";
+                movementCounterText.text = "30";
             }
         }
     }
