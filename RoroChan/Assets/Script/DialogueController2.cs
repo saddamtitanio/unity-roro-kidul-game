@@ -28,6 +28,7 @@ public class DialogueController2 : MonoBehaviour
         public Color speakerColor; 
         public float speakerNamePosX = 0f;
         public Color rawImageColor;
+        public Color dialogueTextColor;
     }
 
     [FormerlySerializedAs("dialogueLines")]
@@ -84,7 +85,7 @@ public class DialogueController2 : MonoBehaviour
     IEnumerator StartDialogue()
     {
         isDialogueTriggered = true;
-        SetSpeakerAndText(dialogue[currentLineIndex].speakerName, dialogue[currentLineIndex].text, dialogue[currentLineIndex].speakerColor, dialogue[currentLineIndex].speakerNamePosX);
+         SetSpeakerAndText(dialogue[currentLineIndex].speakerName, dialogue[currentLineIndex].text, dialogue[currentLineIndex].speakerColor, dialogue[currentLineIndex].dialogueTextColor, dialogue[currentLineIndex].speakerNamePosX);
         SetChoicesText("");
         isAnimating = true;
         yield return StartCoroutine(FadeInUI());
@@ -105,11 +106,12 @@ public class DialogueController2 : MonoBehaviour
         currentLineIndex++;
         if (currentLineIndex < dialogue.Length)
         {
-            SetSpeakerAndText(dialogue[currentLineIndex].speakerName, dialogue[currentLineIndex].text, dialogue[currentLineIndex].speakerColor, dialogue[currentLineIndex].speakerNamePosX);
+           SetSpeakerAndText(dialogue[currentLineIndex].speakerName, dialogue[currentLineIndex].text, dialogue[currentLineIndex].speakerColor, dialogue[currentLineIndex].dialogueTextColor, dialogue[currentLineIndex].speakerNamePosX);
         }
         else
         {
             Debug.Log("End of dialogue!");
+
             if (!string.IsNullOrEmpty(nextScene))
             {
                 SceneManager.LoadScene(nextScene);
@@ -117,10 +119,10 @@ public class DialogueController2 : MonoBehaviour
         }
     }
 
-    void SetSpeakerAndText(string name, string text, Color color, float posX)
+     void SetSpeakerAndText(string name, string text, Color color, Color textColor, float posX)
     {
         SetSpeakerName(dialogue[currentLineIndex].speakerName, dialogue[currentLineIndex].speakerColor, dialogue[currentLineIndex].speakerNamePosX);
-        SetDialogueText(text);
+        SetDialogueText(text, textColor);
         if (speakerColorImage != null)
         {
             StartCoroutine(FadeRawImageColor(dialogue[currentLineIndex].rawImageColor));
@@ -150,9 +152,10 @@ IEnumerator FadeRawImageColor(Color targetColor)
         rectTransform.anchoredPosition = new Vector2(posX, rectTransform.anchoredPosition.y);
     }
 
-    void SetDialogueText(string text)
+    void SetDialogueText(string text, Color textColor)
     {
         dialogueText.text = text;
+        dialogueText.color = textColor;
     }
 
     void SetChoicesText(string text)
@@ -164,6 +167,7 @@ IEnumerator FadeRawImageColor(Color targetColor)
     IEnumerator FadeChoices()
     {
         float targetAlpha = choicesText.text.Length > 0 ? 1f : 0f;
+
         while (!Mathf.Approximately(choicesText.alpha, targetAlpha))
         {
             choicesText.alpha = Mathf.MoveTowards(choicesText.alpha, targetAlpha, Time.deltaTime * fadeInSpeed);
@@ -174,7 +178,9 @@ IEnumerator FadeRawImageColor(Color targetColor)
     IEnumerator HandleChoiceWithFade()
     {
         SetChoicesText($"{dialogue[currentLineIndex].rightChoiceText}\n{dialogue[currentLineIndex].wrongChoiceText}");
+
         yield return StartCoroutine(WaitForChoiceInput());
+
         SetChoicesText("");
     }
 

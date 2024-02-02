@@ -392,6 +392,7 @@ MonoBehaviour:
     speakerColor: {r: 0.972549, g: 0.7411765, b: 0.30980393, a: 0}
     speakerNamePosX: 400
     rawImageColor: {r: 1, g: 1, b: 1, a: 1}
+    dialogueTextColor: {r: 0.972549, g: 0.7411765, b: 0.30980393, a: 1}
   - speakerName: Nyi Roro Kidul
     text: Halo mas
     isChoice: 0
@@ -400,6 +401,7 @@ MonoBehaviour:
     speakerColor: {r: 1, g: 1, b: 1, a: 0}
     speakerNamePosX: -400
     rawImageColor: {r: 0.50980395, g: 0.50980395, b: 0.50980395, a: 1}
+    dialogueTextColor: {r: 1, g: 1, b: 1, a: 1}
   - speakerName: Nerd Boy
     text: ???
     isChoice: 0
@@ -408,6 +410,7 @@ MonoBehaviour:
     speakerColor: {r: 0.972549, g: 0.7411765, b: 0.30980393, a: 0}
     speakerNamePosX: 400
     rawImageColor: {r: 1, g: 1, b: 1, a: 1}
+    dialogueTextColor: {r: 0.972549, g: 0.7411765, b: 0.30980393, a: 1}
   - speakerName: Nyi Roro Kidul
     text: Lagi nyari apa ya ?
     isChoice: 0
@@ -416,6 +419,7 @@ MonoBehaviour:
     speakerColor: {r: 1, g: 1, b: 1, a: 0}
     speakerNamePosX: -400
     rawImageColor: {r: 0.50980395, g: 0.50980395, b: 0.50980395, a: 1}
+    dialogueTextColor: {r: 1, g: 1, b: 1, a: 1}
   - speakerName: Nerd Boy
     text: Ndeh,justru aku yang harus nanya itu.
     isChoice: 0
@@ -424,6 +428,7 @@ MonoBehaviour:
     speakerColor: {r: 0.972549, g: 0.7411765, b: 0.30980393, a: 0}
     speakerNamePosX: 400
     rawImageColor: {r: 1, g: 1, b: 1, a: 1}
+    dialogueTextColor: {r: 0.972549, g: 0.7411765, b: 0.30980393, a: 1}
   - speakerName: Nyi Roro Kidul
     text: Ga ada kok cuma lagi liat pemandangan pantai. Btw nekat banget kamu memakai
       pakaian warna hijau disini
@@ -433,6 +438,7 @@ MonoBehaviour:
     speakerColor: {r: 1, g: 1, b: 1, a: 0}
     speakerNamePosX: -400
     rawImageColor: {r: 0.50980395, g: 0.50980395, b: 0.50980395, a: 1}
+    dialogueTextColor: {r: 1, g: 1, b: 1, a: 1}
   - speakerName: Nerd Boy
     text: Lah eluu juga,lagian jaman gini mah ga ad yang namanya mistis- mistis
     isChoice: 0
@@ -441,6 +447,7 @@ MonoBehaviour:
     speakerColor: {r: 0.972549, g: 0.7411765, b: 0.30980393, a: 0}
     speakerNamePosX: 400
     rawImageColor: {r: 1, g: 1, b: 1, a: 1}
+    dialogueTextColor: {r: 0.972549, g: 0.7411765, b: 0.30980393, a: 1}
   - speakerName: Nyi Roro Kidul
     text: 
     isChoice: 1
@@ -449,6 +456,7 @@ MonoBehaviour:
     speakerColor: {r: 1, g: 1, b: 1, a: 0}
     speakerNamePosX: -400
     rawImageColor: {r: 0.50980395, g: 0.50980395, b: 0.50980395, a: 1}
+    dialogueTextColor: {r: 1, g: 1, b: 1, a: 1}
   - speakerName: Nerd Boy
     text: Heh, ayoo sini.Buktikan aja kalau bisa. Gini-gini aku tamat kuliah semester
       6 IPK 3.99
@@ -458,6 +466,7 @@ MonoBehaviour:
     speakerColor: {r: 0.972549, g: 0.7411765, b: 0.30980393, a: 0}
     speakerNamePosX: 400
     rawImageColor: {r: 1, g: 1, b: 1, a: 1}
+    dialogueTextColor: {r: 0.972549, g: 0.7411765, b: 0.30980393, a: 1}
 --- !u!1 &810306396
 GameObject:
   m_ObjectHideFlags: 0

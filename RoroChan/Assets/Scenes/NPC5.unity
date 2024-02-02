@@ -512,6 +512,7 @@ MonoBehaviour:
     speakerColor: {r: 0.972549, g: 0.7411765, b: 0.30980393, a: 1}
     speakerNamePosX: 400
     rawImageColor: {r: 1, g: 1, b: 1, a: 1}
+    dialogueTextColor: {r: 0.972549, g: 0.7411765, b: 0.30980393, a: 1}
   - speakerName: Nyi Roro Kidul
     text: Haaii
     isChoice: 0
@@ -520,6 +521,7 @@ MonoBehaviour:
     speakerColor: {r: 1, g: 1, b: 1, a: 0}
     speakerNamePosX: -400
     rawImageColor: {r: 0.50980395, g: 0.50980395, b: 0.50980395, a: 1}
+    dialogueTextColor: {r: 1, g: 1, b: 1, a: 1}
   - speakerName: Tomboy Girl
     text: Elu siapa dah, sok asik
     isChoice: 0
@@ -528,6 +530,7 @@ MonoBehaviour:
     speakerColor: {r: 0.972549, g: 0.7411765, b: 0.30980393, a: 1}
     speakerNamePosX: 400
     rawImageColor: {r: 1, g: 1, b: 1, a: 1}
+    dialogueTextColor: {r: 0.972549, g: 0.7411765, b: 0.30980393, a: 1}
   - speakerName: Nyi Roro Kidul
     text: Aku adalah akhir dari liburanmu
     isChoice: 0
@@ -536,6 +539,7 @@ MonoBehaviour:
     speakerColor: {r: 1, g: 1, b: 1, a: 1}
     speakerNamePosX: -400
     rawImageColor: {r: 0.50980395, g: 0.50980395, b: 0.50980395, a: 1}
+    dialogueTextColor: {r: 1, g: 1, b: 1, a: 1}
   - speakerName: Tomboy Girl
     text: Haah?Apaan sih freak banget
     isChoice: 0
@@ -544,6 +548,7 @@ MonoBehaviour:
     speakerColor: {r: 0.972549, g: 0.7411765, b: 0.30980393, a: 1}
     speakerNamePosX: 400
     rawImageColor: {r: 1, g: 1, b: 1, a: 1}
+    dialogueTextColor: {r: 0.972549, g: 0.7411765, b: 0.30980393, a: 1}
   - speakerName: Nyi Roro Kidul
     text: 
     isChoice: 1
@@ -552,6 +557,7 @@ MonoBehaviour:
     speakerColor: {r: 1, g: 1, b: 1, a: 1}
     speakerNamePosX: -400
     rawImageColor: {r: 0.50980395, g: 0.50980395, b: 0.50980395, a: 1}
+    dialogueTextColor: {r: 1, g: 1, b: 1, a: 1}
   - speakerName: Nyi Roro Kidul
     text: Hehehe berani-beraninya sih kalian menantang ratu penguasa pantai laut
       selatan!!! (uhuk*uhuk)
@@ -561,6 +567,7 @@ MonoBehaviour:
     speakerColor: {r: 1, g: 1, b: 1, a: 1}
     speakerNamePosX: -400
     rawImageColor: {r: 0.50980395, g: 0.50980395, b: 0.50980395, a: 1}
+    dialogueTextColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!4 &690355688
 Transform:
   m_ObjectHideFlags: 0

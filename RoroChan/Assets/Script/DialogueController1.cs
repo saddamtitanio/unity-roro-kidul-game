@@ -28,6 +28,7 @@ public class DialogueController1 : MonoBehaviour
         public Color speakerColor; 
         public float speakerNamePosX = 0f;
         public Color rawImageColor;
+        public Color dialogueTextColor;
     }
 
     [FormerlySerializedAs("dialogueLines")]
@@ -84,7 +85,7 @@ public class DialogueController1 : MonoBehaviour
     IEnumerator StartDialogue()
     {
         isDialogueTriggered = true;
-        SetSpeakerAndText(dialogue[currentLineIndex].speakerName, dialogue[currentLineIndex].text, dialogue[currentLineIndex].speakerColor, dialogue[currentLineIndex].speakerNamePosX);
+         SetSpeakerAndText(dialogue[currentLineIndex].speakerName, dialogue[currentLineIndex].text, dialogue[currentLineIndex].speakerColor, dialogue[currentLineIndex].dialogueTextColor, dialogue[currentLineIndex].speakerNamePosX);
         SetChoicesText("");
         isAnimating = true;
         yield return StartCoroutine(FadeInUI());
@@ -105,7 +106,7 @@ public class DialogueController1 : MonoBehaviour
         currentLineIndex++;
         if (currentLineIndex < dialogue.Length)
         {
-            SetSpeakerAndText(dialogue[currentLineIndex].speakerName, dialogue[currentLineIndex].text, dialogue[currentLineIndex].speakerColor, dialogue[currentLineIndex].speakerNamePosX);
+           SetSpeakerAndText(dialogue[currentLineIndex].speakerName, dialogue[currentLineIndex].text, dialogue[currentLineIndex].speakerColor, dialogue[currentLineIndex].dialogueTextColor, dialogue[currentLineIndex].speakerNamePosX);
         }
         else
         {
@@ -118,10 +119,10 @@ public class DialogueController1 : MonoBehaviour
         }
     }
 
-    void SetSpeakerAndText(string name, string text, Color color, float posX)
+     void SetSpeakerAndText(string name, string text, Color color, Color textColor, float posX)
     {
         SetSpeakerName(dialogue[currentLineIndex].speakerName, dialogue[currentLineIndex].speakerColor, dialogue[currentLineIndex].speakerNamePosX);
-        SetDialogueText(text);
+        SetDialogueText(text, textColor);
         if (speakerColorImage != null)
         {
             StartCoroutine(FadeRawImageColor(dialogue[currentLineIndex].rawImageColor));
@@ -151,9 +152,10 @@ IEnumerator FadeRawImageColor(Color targetColor)
         rectTransform.anchoredPosition = new Vector2(posX, rectTransform.anchoredPosition.y);
     }
 
-    void SetDialogueText(string text)
+    void SetDialogueText(string text, Color textColor)
     {
         dialogueText.text = text;
+        dialogueText.color = textColor;
     }
 
     void SetChoicesText(string text)
