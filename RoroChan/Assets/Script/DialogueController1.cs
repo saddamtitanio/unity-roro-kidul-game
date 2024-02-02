@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 
-public class DialogueController : MonoBehaviour
+public class DialogueController1 : MonoBehaviour
 {
     public TextMeshProUGUI speakerNameText;
     public TextMeshProUGUI dialogueText;

@@ -449,7 +449,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 465471128}
-  - component: {fileID: 465471127}
+  - component: {fileID: 465471129}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -457,103 +457,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &465471127
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 465471126}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86fcf3b0214695f4cb9eb7d077c9d14a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speakerNameText: {fileID: 1913903527}
-  dialogueText: {fileID: 1874569972}
-  choicesText: {fileID: 427507334}
-  fadeInSpeed: 10
-  fadeOutSpeed: 10
-  nextScene: Bridge3
-  gameOverScene: BikinGeram
-  dialogue:
-  - speakerName: Shy Girl
-    text: Aa-aah,umm,kok m-masih belum balik ya si mas atlet
-    isChoice: 0
-    rightChoiceText: 
-    wrongChoiceText: 
-    speakerColor: {r: 0.972549, g: 0.7411765, b: 0.30980393, a: 1}
-    speakerNamePosX: 400
-  - speakerName: Nyi Roro Kidul
-    text: Hai mbak lagi ngapain keliling di tepi pantai ini?
-    isChoice: 0
-    rightChoiceText: 
-    wrongChoiceText: 
-    speakerColor: {r: 1, g: 1, b: 1, a: 0}
-    speakerNamePosX: -400
-  - speakerName: Shy Girl
-    text: Umm, s-sebenar..Eeh t-tidak ada kok m-mbak cuma lagi k-keliling
-    isChoice: 0
-    rightChoiceText: 
-    wrongChoiceText: 
-    speakerColor: {r: 0.972549, g: 0.7411765, b: 0.30980393, a: 1}
-    speakerNamePosX: 400
-  - speakerName: Nyi Roro Kidul
-    text: Yuk sini.Aku juga lagi mau lihat pemandangan sekitar
-    isChoice: 0
-    rightChoiceText: 
-    wrongChoiceText: 
-    speakerColor: {r: 1, g: 1, b: 1, a: 1}
-    speakerNamePosX: -400
-  - speakerName: Shy Girl
-    text: S-seriusan?B-boleh
-    isChoice: 0
-    rightChoiceText: 
-    wrongChoiceText: 
-    speakerColor: {r: 0.972549, g: 0.7411765, b: 0.30980393, a: 1}
-    speakerNamePosX: 400
-  - speakerName: Shy Girl
-    text: W-wah mbak area pantai ini dingin sekali
-    isChoice: 0
-    rightChoiceText: 
-    wrongChoiceText: 
-    speakerColor: {r: 0.972549, g: 0.7411765, b: 0.30980393, a: 1}
-    speakerNamePosX: 400
-  - speakerName: Nyi Roro Kidul
-    text: Woiyadong,kamu kalau capek istirahat saja
-    isChoice: 0
-    rightChoiceText: 
-    wrongChoiceText: 
-    speakerColor: {r: 1, g: 1, b: 1, a: 1}
-    speakerNamePosX: -400
-  - speakerName: Shy Girl
-    text: H-hah maksudnya mbak
-    isChoice: 0
-    rightChoiceText: 
-    wrongChoiceText: 
-    speakerColor: {r: 0.972549, g: 0.7411765, b: 0.30980393, a: 1}
-    speakerNamePosX: 400
-  - speakerName: Nyi Roro Kidul
-    text: 
-    isChoice: 1
-    rightChoiceText: (Naikkan gelombang dan pasang surut air)
-    wrongChoiceText: Akan kuculik kamu
-    speakerColor: {r: 1, g: 1, b: 1, a: 1}
-    speakerNamePosX: -400
-  - speakerName: Shy Girl
-    text: M-mbak mau ngapain mbak?J-jangan mbak!!T-tolongg
-    isChoice: 0
-    rightChoiceText: 
-    wrongChoiceText: 
-    speakerColor: {r: 0.972549, g: 0.7411765, b: 0.30980393, a: 1}
-    speakerNamePosX: 400
-  - speakerName: Nyi Roro Kidul
-    text: Hehe
-    isChoice: 0
-    rightChoiceText: 
-    wrongChoiceText: 
-    speakerColor: {r: 1, g: 1, b: 1, a: 1}
-    speakerNamePosX: -400
 --- !u!4 &465471128
 Transform:
   m_ObjectHideFlags: 0
@@ -569,6 +472,103 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &465471129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 465471126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6a96b3f60e69af40b36c831dd6fe68c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speakerNameText: {fileID: 1913903527}
+  dialogueText: {fileID: 1874569972}
+  choicesText: {fileID: 427507334}
+  fadeInSpeed: 10
+  fadeOutSpeed: 10
+  nextScene: Bridge3
+  gameOverScene: BikinGeram
+  dialogue:
+  - speakerName: Shy Girl
+    text: Aa-aah, umm, kok m-masih belum balik ya si mas atlet
+    isChoice: 0
+    rightChoiceText: 
+    wrongChoiceText: 
+    speakerColor: {r: 0.972549, g: 0.7411765, b: 0.30980393, a: 0}
+    speakerNamePosX: 400
+  - speakerName: Nyi Roro Kidul
+    text: Hai mbak lagi ngapain keliling di tepi pantai ini?
+    isChoice: 0
+    rightChoiceText: 
+    wrongChoiceText: 
+    speakerColor: {r: 1, g: 1, b: 1, a: 0}
+    speakerNamePosX: -400
+  - speakerName: Shy Girl
+    text: Umm, s-sebenar.. Eeh t-tidak ada kok m-mbak cuma lagi k-keliling
+    isChoice: 0
+    rightChoiceText: 
+    wrongChoiceText: 
+    speakerColor: {r: 0.972549, g: 0.7411765, b: 0.30980393, a: 0}
+    speakerNamePosX: 400
+  - speakerName: Nyi Roro Kidul
+    text: Yuk sini. Aku juga lagi mau lihat pemandangan sekitar
+    isChoice: 0
+    rightChoiceText: 
+    wrongChoiceText: 
+    speakerColor: {r: 1, g: 1, b: 1, a: 0}
+    speakerNamePosX: -400
+  - speakerName: Shy Girl
+    text: S-seriusan? B-boleh
+    isChoice: 0
+    rightChoiceText: 
+    wrongChoiceText: 
+    speakerColor: {r: 0.972549, g: 0.7411765, b: 0.30980393, a: 0}
+    speakerNamePosX: 400
+  - speakerName: Shy Girl
+    text: W-wah mbak area pantai ini dingin sekali
+    isChoice: 0
+    rightChoiceText: 
+    wrongChoiceText: 
+    speakerColor: {r: 0.972549, g: 0.7411765, b: 0.30980393, a: 0}
+    speakerNamePosX: 400
+  - speakerName: Nyi Roro Kidul
+    text: Woiyadong, kamu kalau capek istirahat saja
+    isChoice: 0
+    rightChoiceText: 
+    wrongChoiceText: 
+    speakerColor: {r: 1, g: 1, b: 1, a: 0}
+    speakerNamePosX: -400
+  - speakerName: Shy Girl
+    text: H-hah maksudnya mbak
+    isChoice: 0
+    rightChoiceText: 
+    wrongChoiceText: 
+    speakerColor: {r: 0.972549, g: 0.7411765, b: 0.30980393, a: 0}
+    speakerNamePosX: 400
+  - speakerName: Nyi Roro Kidul
+    text: 
+    isChoice: 1
+    rightChoiceText: Akan kuculik kamu
+    wrongChoiceText: (Naikkan gelombang dan pasang surut air)
+    speakerColor: {r: 1, g: 1, b: 1, a: 0}
+    speakerNamePosX: -400
+  - speakerName: Shy Girl
+    text: M-mbak mau ngapain mbak?J-jangan mbak!!T-tolongg
+    isChoice: 0
+    rightChoiceText: 
+    wrongChoiceText: 
+    speakerColor: {r: 0.972549, g: 0.7411765, b: 0.30980393, a: 0}
+    speakerNamePosX: 400
+  - speakerName: Nyi Roro Kidul
+    text: Hehe
+    isChoice: 0
+    rightChoiceText: 
+    wrongChoiceText: 
+    speakerColor: {r: 1, g: 1, b: 1, a: 0}
+    speakerNamePosX: -400
 --- !u!1 &519927350
 GameObject:
   m_ObjectHideFlags: 0

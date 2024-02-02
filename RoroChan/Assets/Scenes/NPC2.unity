@@ -340,7 +340,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 511392600}
-  - component: {fileID: 511392599}
+  - component: {fileID: 511392601}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -348,91 +348,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &511392599
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 511392598}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 86fcf3b0214695f4cb9eb7d077c9d14a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speakerNameText: {fileID: 2136806877}
-  dialogueText: {fileID: 972427318}
-  choicesText: {fileID: 338046263}
-  fadeInSpeed: 10
-  fadeOutSpeed: 10
-  nextScene: Bridge2
-  gameOverScene: JanganGegabah
-  dialogue:
-  - speakerName: Nerd Boy
-    text: Ini si periang mana dah? Dah capek-capek la aku mutar-mutar daritadi
-    isChoice: 0
-    rightChoiceText: 
-    wrongChoiceText: 
-    speakerColor: {r: 0.972549, g: 0.7411765, b: 0.30980393, a: 1}
-    speakerNamePosX: 400
-  - speakerName: Nyi Roro Kidul
-    text: Halo mas
-    isChoice: 0
-    rightChoiceText: 
-    wrongChoiceText: 
-    speakerColor: {r: 1, g: 1, b: 1, a: 0}
-    speakerNamePosX: -400
-  - speakerName: Nerd Boy
-    text: ???
-    isChoice: 0
-    rightChoiceText: 
-    wrongChoiceText: 
-    speakerColor: {r: 0.972549, g: 0.7411765, b: 0.30980393, a: 1}
-    speakerNamePosX: 400
-  - speakerName: Nyi Roro Kidul
-    text: Lagi nyari apa ya ?
-    isChoice: 0
-    rightChoiceText: 
-    wrongChoiceText: 
-    speakerColor: {r: 1, g: 1, b: 1, a: 1}
-    speakerNamePosX: -400
-  - speakerName: Nerd Boy
-    text: Ndeh, justru aku yang harus nanya itu
-    isChoice: 0
-    rightChoiceText: 
-    wrongChoiceText: 
-    speakerColor: {r: 0.972549, g: 0.7411765, b: 0.30980393, a: 1}
-    speakerNamePosX: 400
-  - speakerName: Nyi Roro Kidul
-    text: Ga ada kok cuma lagi liat pemandangan pantai. Btw nekat banget kamu memakai
-      pakaian warna hijau disini
-    isChoice: 0
-    rightChoiceText: 
-    wrongChoiceText: 
-    speakerColor: {r: 1, g: 1, b: 1, a: 1}
-    speakerNamePosX: -400
-  - speakerName: Nerd Boy
-    text: Lah eluu juga, lagian jaman gini mah ga ad yang namanya mistis- mistis
-    isChoice: 0
-    rightChoiceText: 
-    wrongChoiceText: 
-    speakerColor: {r: 0.972549, g: 0.7411765, b: 0.30980393, a: 1}
-    speakerNamePosX: 400
-  - speakerName: Nyi Roro Kidul
-    text: 
-    isChoice: 1
-    rightChoiceText: Mau lihat bukti mistis ga? Kalau iya,sini ikut aku
-    wrongChoiceText: Mau aku culik kah sebagai buktinya?
-    speakerColor: {r: 1, g: 1, b: 1, a: 1}
-    speakerNamePosX: -400
-  - speakerName: Nerd Boy
-    text: Heh,ayoo sini.Buktikan aja kalau bisa.Gini-gini aku tamat kuliah semester
-      6 IPK 3.99
-    isChoice: 0
-    rightChoiceText: 
-    wrongChoiceText: 
-    speakerColor: {r: 0.972549, g: 0.7411765, b: 0.30980393, a: 1}
-    speakerNamePosX: 400
 --- !u!4 &511392600
 Transform:
   m_ObjectHideFlags: 0
@@ -448,6 +363,91 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &511392601
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 511392598}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6a96b3f60e69af40b36c831dd6fe68c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speakerNameText: {fileID: 2136806877}
+  dialogueText: {fileID: 972427318}
+  choicesText: {fileID: 338046263}
+  fadeInSpeed: 10
+  fadeOutSpeed: 10
+  nextScene: Bridge2
+  gameOverScene: JanganGegabah
+  dialogue:
+  - speakerName: Nerd Boy
+    text: Ini si periang mana dah? Dah capek-capek la aku mutar-mutar daritadi
+    isChoice: 0
+    rightChoiceText: 
+    wrongChoiceText: 
+    speakerColor: {r: 0.972549, g: 0.7411765, b: 0.30980393, a: 0}
+    speakerNamePosX: 400
+  - speakerName: Nyi Roro Kidul
+    text: Halo mas
+    isChoice: 0
+    rightChoiceText: 
+    wrongChoiceText: 
+    speakerColor: {r: 1, g: 1, b: 1, a: 0}
+    speakerNamePosX: -400
+  - speakerName: Nerd Boy
+    text: ???
+    isChoice: 0
+    rightChoiceText: 
+    wrongChoiceText: 
+    speakerColor: {r: 0.972549, g: 0.7411765, b: 0.30980393, a: 0}
+    speakerNamePosX: 400
+  - speakerName: Nyi Roro Kidul
+    text: Lagi nyari apa ya ?
+    isChoice: 0
+    rightChoiceText: 
+    wrongChoiceText: 
+    speakerColor: {r: 1, g: 1, b: 1, a: 0}
+    speakerNamePosX: -400
+  - speakerName: Nerd Boy
+    text: Ndeh,justru aku yang harus nanya itu.
+    isChoice: 0
+    rightChoiceText: 
+    wrongChoiceText: 
+    speakerColor: {r: 0.972549, g: 0.7411765, b: 0.30980393, a: 0}
+    speakerNamePosX: 400
+  - speakerName: Nyi Roro Kidul
+    text: Ga ada kok cuma lagi liat pemandangan pantai. Btw nekat banget kamu memakai
+      pakaian warna hijau disini
+    isChoice: 0
+    rightChoiceText: 
+    wrongChoiceText: 
+    speakerColor: {r: 1, g: 1, b: 1, a: 0}
+    speakerNamePosX: -400
+  - speakerName: Nerd Boy
+    text: Lah eluu juga,lagian jaman gini mah ga ad yang namanya mistis- mistis
+    isChoice: 0
+    rightChoiceText: 
+    wrongChoiceText: 
+    speakerColor: {r: 0.972549, g: 0.7411765, b: 0.30980393, a: 0}
+    speakerNamePosX: 400
+  - speakerName: Nyi Roro Kidul
+    text: 
+    isChoice: 1
+    rightChoiceText: Mau aku culik kah sebagai buktinya ?
+    wrongChoiceText: Mau lihat bukti mistis ga? Kalau iya, sini ikut aku
+    speakerColor: {r: 1, g: 1, b: 1, a: 0}
+    speakerNamePosX: -400
+  - speakerName: Nerd Boy
+    text: Heh, ayoo sini.Buktikan aja kalau bisa. Gini-gini aku tamat kuliah semester
+      6 IPK 3.99
+    isChoice: 0
+    rightChoiceText: 
+    wrongChoiceText: 
+    speakerColor: {r: 0.972549, g: 0.7411765, b: 0.30980393, a: 0}
+    speakerNamePosX: 400
 --- !u!1 &810306396
 GameObject:
   m_ObjectHideFlags: 0
