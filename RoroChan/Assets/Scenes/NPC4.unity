@@ -497,6 +497,7 @@ MonoBehaviour:
   speakerNameText: {fileID: 1555632444}
   dialogueText: {fileID: 409601262}
   choicesText: {fileID: 627053633}
+  speakerColorImage: {fileID: 795163607}
   fadeInSpeed: 10
   fadeOutSpeed: 10
   nextScene: Bridge4
@@ -510,6 +511,7 @@ MonoBehaviour:
     wrongChoiceText: 
     speakerColor: {r: 0.972549, g: 0.7411765, b: 0.30980393, a: 1}
     speakerNamePosX: 400
+    rawImageColor: {r: 1, g: 1, b: 1, a: 1}
   - speakerName: Nyi Roro Kidul
     text: Hai mas lagi ngapain nih?
     isChoice: 0
@@ -517,6 +519,7 @@ MonoBehaviour:
     wrongChoiceText: 
     speakerColor: {r: 1, g: 1, b: 1, a: 0}
     speakerNamePosX: -400
+    rawImageColor: {r: 0.50980395, g: 0.50980395, b: 0.50980395, a: 1}
   - speakerName: Jock Boy
     text: Waduh nona lagi ngapain di tepi pantai sendirian
     isChoice: 0
@@ -524,6 +527,7 @@ MonoBehaviour:
     wrongChoiceText: 
     speakerColor: {r: 0.972549, g: 0.7411765, b: 0.30980393, a: 1}
     speakerNamePosX: 400
+    rawImageColor: {r: 1, g: 1, b: 1, a: 1}
   - speakerName: Nyi Roro Kidul
     text: Cuma melihat pemandangan yang indah
     isChoice: 0
@@ -531,6 +535,7 @@ MonoBehaviour:
     wrongChoiceText: 
     speakerColor: {r: 1, g: 1, b: 1, a: 1}
     speakerNamePosX: -400
+    rawImageColor: {r: 0.50980395, g: 0.50980395, b: 0.50980395, a: 1}
   - speakerName: Jock Boy
     text: Btw nona apakah kamu tau kenapa U+X=25. Cuz jika X adalah 15 maka sure
       u are a 10
@@ -539,6 +544,7 @@ MonoBehaviour:
     wrongChoiceText: 
     speakerColor: {r: 0.972549, g: 0.7411765, b: 0.30980393, a: 1}
     speakerNamePosX: 400
+    rawImageColor: {r: 1, g: 1, b: 1, a: 1}
   - speakerName: Nyi Roro Kidul
     text: ...
     isChoice: 1
@@ -546,6 +552,7 @@ MonoBehaviour:
     wrongChoiceText: (Pergi tanpa berkata-kata)
     speakerColor: {r: 1, g: 1, b: 1, a: 1}
     speakerNamePosX: -400
+    rawImageColor: {r: 0.50980395, g: 0.50980395, b: 0.50980395, a: 1}
   - speakerName: Jock Boy
     text: Mamaah Tolonggg,mamaah aku takuut
     isChoice: 0
@@ -553,6 +560,7 @@ MonoBehaviour:
     wrongChoiceText: 
     speakerColor: {r: 0.972549, g: 0.7411765, b: 0.30980393, a: 1}
     speakerNamePosX: 400
+    rawImageColor: {r: 1, g: 1, b: 1, a: 1}
   - speakerName: Nyi Roro Kidul
     text: ...
     isChoice: 0
@@ -560,6 +568,7 @@ MonoBehaviour:
     wrongChoiceText: 
     speakerColor: {r: 1, g: 1, b: 1, a: 1}
     speakerNamePosX: -400
+    rawImageColor: {r: 0.50980395, g: 0.50980395, b: 0.50980395, a: 1}
 --- !u!4 &690355688
 Transform:
   m_ObjectHideFlags: 0

@@ -2,14 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
-
 public class DialogueController2 : MonoBehaviour
 {
     public TextMeshProUGUI speakerNameText;
     public TextMeshProUGUI dialogueText;
     public TextMeshProUGUI choicesText;
+    public RawImage speakerColorImage;
     public float fadeInSpeed = 1.5f;
     public float fadeOutSpeed = 1.5f;
     public string nextScene;
@@ -26,6 +27,7 @@ public class DialogueController2 : MonoBehaviour
         public string wrongChoiceText;
         public Color speakerColor; 
         public float speakerNamePosX = 0f;
+        public Color rawImageColor;
     }
 
     [FormerlySerializedAs("dialogueLines")]
@@ -82,10 +84,8 @@ public class DialogueController2 : MonoBehaviour
     IEnumerator StartDialogue()
     {
         isDialogueTriggered = true;
-
         SetSpeakerAndText(dialogue[currentLineIndex].speakerName, dialogue[currentLineIndex].text, dialogue[currentLineIndex].speakerColor, dialogue[currentLineIndex].speakerNamePosX);
         SetChoicesText("");
-
         isAnimating = true;
         yield return StartCoroutine(FadeInUI());
         isAnimating = false;
@@ -94,13 +94,9 @@ public class DialogueController2 : MonoBehaviour
     IEnumerator ContinueDialogue()
     {
         isAnimating = true;
-
         yield return StartCoroutine(FadeOutUI());
-
         MoveToNextLineOrScene();
-
         yield return StartCoroutine(FadeInUI());
-
         isAnimating = false;
     }
 
@@ -114,7 +110,6 @@ public class DialogueController2 : MonoBehaviour
         else
         {
             Debug.Log("End of dialogue!");
-
             if (!string.IsNullOrEmpty(nextScene))
             {
                 SceneManager.LoadScene(nextScene);
@@ -125,9 +120,27 @@ public class DialogueController2 : MonoBehaviour
     void SetSpeakerAndText(string name, string text, Color color, float posX)
     {
         SetSpeakerName(dialogue[currentLineIndex].speakerName, dialogue[currentLineIndex].speakerColor, dialogue[currentLineIndex].speakerNamePosX);
-
         SetDialogueText(text);
+        if (speakerColorImage != null)
+        {
+            StartCoroutine(FadeRawImageColor(dialogue[currentLineIndex].rawImageColor));
+        }
     }
+
+IEnumerator FadeRawImageColor(Color targetColor)
+{
+    Color initialColor = speakerColorImage.color;
+    float elapsedTime = 0f;
+    float fadeDuration = 1f; 
+
+    while (elapsedTime < fadeDuration)
+    {
+        speakerColorImage.color = Color.Lerp(initialColor, targetColor, elapsedTime / fadeDuration);
+        elapsedTime += Time.deltaTime;
+        yield return null;
+    }
+    speakerColorImage.color = targetColor;
+}
 
     void SetSpeakerName(string name, Color color, float posX)
     {
@@ -151,7 +164,6 @@ public class DialogueController2 : MonoBehaviour
     IEnumerator FadeChoices()
     {
         float targetAlpha = choicesText.text.Length > 0 ? 1f : 0f;
-
         while (!Mathf.Approximately(choicesText.alpha, targetAlpha))
         {
             choicesText.alpha = Mathf.MoveTowards(choicesText.alpha, targetAlpha, Time.deltaTime * fadeInSpeed);
@@ -161,37 +173,33 @@ public class DialogueController2 : MonoBehaviour
 
     IEnumerator HandleChoiceWithFade()
     {
-        SetChoicesText($"1. {dialogue[currentLineIndex].rightChoiceText}\n2. {dialogue[currentLineIndex].wrongChoiceText}");
-
+        SetChoicesText($"{dialogue[currentLineIndex].rightChoiceText}\n{dialogue[currentLineIndex].wrongChoiceText}");
         yield return StartCoroutine(WaitForChoiceInput());
-
         SetChoicesText("");
     }
 
     IEnumerator WaitForChoiceInput()
-{
-    bool validInput = false;
-
-    while (!validInput)
     {
-        if (Input.GetKeyDown(KeyCode.UpArrow))
+        bool validInput = false;
+        while (!validInput)
         {
-            validInput = true;
-            if (!string.IsNullOrEmpty(gameOverScene))
+            if (Input.GetKeyDown(KeyCode.UpArrow))
             {
-                SceneManager.LoadScene(gameOverScene);
+                validInput = true;
+                if (!string.IsNullOrEmpty(gameOverScene))
+                {
+                    SceneManager.LoadScene(gameOverScene);
+                }
             }
-        }
-        else if (Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            validInput = true;
-            StartCoroutine(ContinueDialogue());
-        }
+            else if (Input.GetKeyDown(KeyCode.DownArrow))
+            {
+                validInput = true;
+                StartCoroutine(ContinueDialogue());
+            }
 
-        yield return null;
+            yield return null;
+        }
     }
-}
-
 
     IEnumerator FadeInUI()
     {
