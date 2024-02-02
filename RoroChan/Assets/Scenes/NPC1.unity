@@ -762,7 +762,7 @@ MonoBehaviour:
   nextScene: Bridge1
   gameOverScene: GO1
   dialogue:
-  - speakerName: Cheerfull Girl
+  - speakerName: Cheerful Girl
     text: 'Ah, teman-teman pada nggak asyik banget, ya? Pada serius banget,liburan
       kayak gini mending di nikmatin ga si '
     isChoice: 0
@@ -781,7 +781,7 @@ MonoBehaviour:
     speakerNamePosX: -400
     rawImageColor: {r: 0.50980395, g: 0.50980395, b: 0.50980395, a: 1}
     dialogueTextColor: {r: 1, g: 1, b: 1, a: 1}
-  - speakerName: Cheerfull Girl
+  - speakerName: Cheerful Girl
     text: Lah,kamu siapa ?
     isChoice: 0
     rightChoiceText: 
@@ -799,7 +799,7 @@ MonoBehaviour:
     speakerNamePosX: -400
     rawImageColor: {r: 0.50980395, g: 0.50980395, b: 0.50980395, a: 1}
     dialogueTextColor: {r: 1, g: 1, b: 1, a: 1}
-  - speakerName: Cheerfull Girl
+  - speakerName: Cheerful Girl
     text: Waah,mau ngapain niih ? Aku juga lagi gabut si ehehe
     isChoice: 0
     rightChoiceText: 
@@ -817,7 +817,7 @@ MonoBehaviour:
     speakerNamePosX: -400
     rawImageColor: {r: 0.50980395, g: 0.50980395, b: 0.50980395, a: 1}
     dialogueTextColor: {r: 1, g: 1, b: 1, a: 1}
-  - speakerName: Cheerfull Girl
+  - speakerName: Cheerful Girl
     text: Mantaap skuy gazpol !!!
     isChoice: 0
     rightChoiceText: 
