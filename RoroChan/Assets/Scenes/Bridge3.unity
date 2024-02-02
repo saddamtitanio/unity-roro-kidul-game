@@ -894,9 +894,10 @@ MonoBehaviour:
   speakerNameText: {fileID: 645291788}
   dialogueText: {fileID: 485868538}
   choicesText: {fileID: 2108569800}
+  speakerColorImage: {fileID: 0}
   fadeInSpeed: 10
   fadeOutSpeed: 10
-  nextScene: Level3
+  nextScene: Level4
   gameOverScene: SkillIssueScene
   dialogue:
   - speakerName: Jock Boy
@@ -907,6 +908,7 @@ MonoBehaviour:
     wrongChoiceText: 
     speakerColor: {r: 0.972549, g: 0.7411765, b: 0.30980393, a: 1}
     speakerNamePosX: 400
+    rawImageColor: {r: 0, g: 0, b: 0, a: 0}
   - speakerName: Tomboy Girl
     text: Jijik anjir,macam dia mau aja sama orang kek elu
     isChoice: 0
@@ -914,6 +916,7 @@ MonoBehaviour:
     wrongChoiceText: 
     speakerColor: {r: 0.972549, g: 0.7411765, b: 0.30980393, a: 0}
     speakerNamePosX: -400
+    rawImageColor: {r: 0, g: 0, b: 0, a: 0}
   - speakerName: Jock Boy
     text: Orang seperti kamu nona tentunya tidak bisa menilai orang lain dengan baik
     isChoice: 0
@@ -921,6 +924,7 @@ MonoBehaviour:
     wrongChoiceText: 
     speakerColor: {r: 0.972549, g: 0.7411765, b: 0.30980393, a: 1}
     speakerNamePosX: 400
+    rawImageColor: {r: 0, g: 0, b: 0, a: 0}
   - speakerName: Tomboy Girl
     text: Terserah deh,oiya kabarin yang lain kalau kita baliknya besok aja.Feeling
       ku buruk banget
@@ -929,6 +933,7 @@ MonoBehaviour:
     wrongChoiceText: 
     speakerColor: {r: 0.972549, g: 0.7411765, b: 0.30980393, a: 1}
     speakerNamePosX: -400
+    rawImageColor: {r: 0, g: 0, b: 0, a: 0}
   - speakerName: Jock Boy
     text: Tampaknya kamu sudah tak kuat melihat pesona ku di pantai ini.Oke akan
       ku sampaikan nanti pesannya!
@@ -937,6 +942,7 @@ MonoBehaviour:
     wrongChoiceText: 
     speakerColor: {r: 0.972549, g: 0.7411765, b: 0.30980393, a: 1}
     speakerNamePosX: 400
+    rawImageColor: {r: 0, g: 0, b: 0, a: 0}
   - speakerName: Tomboy Girl
     text: Y
     isChoice: 0
@@ -944,6 +950,7 @@ MonoBehaviour:
     wrongChoiceText: 
     speakerColor: {r: 0.972549, g: 0.7411765, b: 0.30980393, a: 1}
     speakerNamePosX: -400
+    rawImageColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!4 &958918655
 Transform:
   m_ObjectHideFlags: 0
