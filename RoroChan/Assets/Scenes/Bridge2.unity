@@ -406,8 +406,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Dialogue
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: eede6dfe33ec93240821ab44b76b7035, type: 2}
-  m_sharedMaterial: {fileID: 6953546729798584379, guid: eede6dfe33ec93240821ab44b76b7035, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: ca0a4873fcdafa844894c791be04a6d6, type: 2}
+  m_sharedMaterial: {fileID: 7457789671293104996, guid: ca0a4873fcdafa844894c791be04a6d6, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -612,8 +612,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Name
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: eede6dfe33ec93240821ab44b76b7035, type: 2}
-  m_sharedMaterial: {fileID: 6953546729798584379, guid: eede6dfe33ec93240821ab44b76b7035, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: ca0a4873fcdafa844894c791be04a6d6, type: 2}
+  m_sharedMaterial: {fileID: 7457789671293104996, guid: ca0a4873fcdafa844894c791be04a6d6, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -894,6 +894,7 @@ MonoBehaviour:
   speakerNameText: {fileID: 645291788}
   dialogueText: {fileID: 485868538}
   choicesText: {fileID: 2108569800}
+  speakerColorImage: {fileID: 0}
   fadeInSpeed: 10
   fadeOutSpeed: 10
   nextScene: Level3
@@ -907,6 +908,7 @@ MonoBehaviour:
     wrongChoiceText: 
     speakerColor: {r: 0.972549, g: 0.7411765, b: 0.30980393, a: 1}
     speakerNamePosX: 400
+    rawImageColor: {r: 0, g: 0, b: 0, a: 0}
   - speakerName: Jock Boy
     text: Hai gadis,kenapa kamu begitu panik.Santai saja,tidak ada yang bisa menganggu
       liburan kita yang indah ini
@@ -915,6 +917,7 @@ MonoBehaviour:
     wrongChoiceText: 
     speakerColor: {r: 0.972549, g: 0.7411765, b: 0.30980393, a: 0}
     speakerNamePosX: -400
+    rawImageColor: {r: 0, g: 0, b: 0, a: 0}
   - speakerName: Shy Girl
     text: T-tapi mereka belum balik dari kemarin
     isChoice: 0
@@ -922,6 +925,7 @@ MonoBehaviour:
     wrongChoiceText: 
     speakerColor: {r: 0.972549, g: 0.7411765, b: 0.30980393, a: 1}
     speakerNamePosX: 400
+    rawImageColor: {r: 0, g: 0, b: 0, a: 0}
   - speakerName: Jock Boy
     text: Hhmm kisah yang menarik.Alamak tampaknya mereka ber 2 harus dipergoki dulu
     isChoice: 0
@@ -929,6 +933,7 @@ MonoBehaviour:
     wrongChoiceText: 
     speakerColor: {r: 0.972549, g: 0.7411765, b: 0.30980393, a: 1}
     speakerNamePosX: -400
+    rawImageColor: {r: 0, g: 0, b: 0, a: 0}
   - speakerName: Shy Girl
     text: M-maksudnya?
     isChoice: 0
@@ -936,6 +941,7 @@ MonoBehaviour:
     wrongChoiceText: 
     speakerColor: {r: 0.972549, g: 0.7411765, b: 0.30980393, a: 1}
     speakerNamePosX: 400
+    rawImageColor: {r: 0, g: 0, b: 0, a: 0}
   - speakerName: Jock Boy
     text: Aah ga adaa.Lihat deh mumpung cuaca cerah gini alangkah baiknya kita berpisah 
       dulu ga sie ?Aku mau ngeliat sekitar
@@ -944,6 +950,7 @@ MonoBehaviour:
     wrongChoiceText: 
     speakerColor: {r: 0.972549, g: 0.7411765, b: 0.30980393, a: 1}
     speakerNamePosX: -400
+    rawImageColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!4 &958918655
 Transform:
   m_ObjectHideFlags: 0
@@ -1161,8 +1168,8 @@ MonoBehaviour:
 
     Choice'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: eede6dfe33ec93240821ab44b76b7035, type: 2}
-  m_sharedMaterial: {fileID: 6953546729798584379, guid: eede6dfe33ec93240821ab44b76b7035, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: ca0a4873fcdafa844894c791be04a6d6, type: 2}
+  m_sharedMaterial: {fileID: 7457789671293104996, guid: ca0a4873fcdafa844894c791be04a6d6, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
