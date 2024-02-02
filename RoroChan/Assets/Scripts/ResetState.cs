@@ -7,7 +7,9 @@ public class ResetState : MonoBehaviour
 {
     public Transform playerStartingPosition;
     public Transform endPosition;
-    private Vector3[] startingPositions;
+
+    [HideInInspector]
+    public Vector3[] startingPositions;
 
     public GameObject[] obstacles;
 
@@ -67,16 +69,15 @@ public class ResetState : MonoBehaviour
 
     void Update()
     {
-        PlayerMovement playerMovementScript = GameObject.Find("Player").GetComponent<PlayerMovement>();
+/*        PlayerMovement playerMovementScript = GameObject.Find("Player").GetComponent<PlayerMovement>();
         movementCounter = playerMovementScript.movementCounter;
 
-        if (movementCounter < 0)
+        if (movementCounter <= 0)
         {
             for (int i = 0; i < obstacles.Length; i++)
             {
-                obstacles[i].SetActive(true);
                 obstacles[i].transform.position = startingPositions[i];
             }
         }
-    }
+*/    }
 }

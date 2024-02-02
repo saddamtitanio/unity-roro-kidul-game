@@ -1475,7 +1475,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 8.12
+  orthographic size: 7.97
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -6302,6 +6302,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerStartingPosition: {fileID: 1514904994}
   endPosition: {fileID: 1143233800}
+  startingPositions: []
   obstacles:
   - {fileID: 1648340108}
   - {fileID: 1171864805}

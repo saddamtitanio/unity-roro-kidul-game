@@ -86,10 +86,14 @@ public class PlayerMovement : MonoBehaviour
                 }
 
                 movementCounter--;
-                anim.SetBool("isMoving", true);
-                StartCoroutine(StopMovingAnimation());
 
-                StartCoroutine(SlidePlayer(moveDirection));
+                if (checkImmovableObj(transform.position, moveDirection) && isInWater() && !isSliding && !isTrapped)
+                {
+                    anim.SetBool("isMoving", true);
+                    StartCoroutine(StopMovingAnimation());
+
+                    StartCoroutine(SlidePlayer(moveDirection));
+                }
             }
         }
 
@@ -151,7 +155,6 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        isPlayerDead();
         isDestinationReached();
     }
 
@@ -220,6 +223,7 @@ public class PlayerMovement : MonoBehaviour
         {
             anim.SetBool("isPush", true);
 
+
             if (!checkAdjacentObj(objectDetected, direction) && checkImmovableObj(objectDetected.transform.position, direction))
             {
                 Vector3 obstacleOrigPos = objectDetected.transform.position;
@@ -233,7 +237,6 @@ public class PlayerMovement : MonoBehaviour
                 }
                 objectDetected.transform.position = targetObstaclePos;
             }
-            isPlayerDead();
             checkTraps(Vector3.zero);
         }
         else
@@ -268,12 +271,17 @@ public class PlayerMovement : MonoBehaviour
 
     void isPlayerDead()
     {
-        ResetState initialCounter = FindObjectOfType<ResetState>();
-        Scene scene = initialCounter.scene;
+        ResetState reset = FindObjectOfType<ResetState>();
+        Scene scene = reset.scene;
 
         if (movementCounter < 0)
         {
-            movementCounter = initialCounter.sceneMovementCounters[scene.name];
+            for (int i = 0; i < obstacles.Length; i++)
+            {
+                reset.obstacles[i].transform.position = reset.startingPositions[i];
+            }
+
+            movementCounter = reset.sceneMovementCounters[scene.name];
             anim.SetBool("isMoving", false);
             transform.position = startingPoint.transform.position;
             spriteRenderer.flipX = true;
@@ -286,7 +294,6 @@ public class PlayerMovement : MonoBehaviour
         {
             if (Vector2.Distance(obj.transform.position, targetPos) < 0.5f)
             {
-                isPlayerDead();
                 return obj;
             }
         }
@@ -301,7 +308,6 @@ public class PlayerMovement : MonoBehaviour
             {
                 if (Vector2.Distance(pushedObject.transform.position + direction, obj.transform.position) < 0.5f)
                 {
-                    isPlayerDead();
                     return true;
                 }
             }
@@ -320,7 +326,6 @@ public class PlayerMovement : MonoBehaviour
 
             if (obstacle.GetTile(obstacleMap) != null)
             {
-                isPlayerDead();
                 return false;
             }
         }
@@ -333,7 +338,6 @@ public class PlayerMovement : MonoBehaviour
 
         if (waterTilemap.HasTile(playerCellPosition))
         {
-            isPlayerDead();
             return true;
         }
         return false;
@@ -346,7 +350,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (trapTilemap.HasTile(playerCellPosition))
         {
-            isPlayerDead();
+            Debug.Log("TEST");
             movementCounter--;
             return true;
         }
@@ -359,7 +363,6 @@ public class PlayerMovement : MonoBehaviour
 
         if (trapTilemap.HasTile(playerCellPosition))
         {
-            isPlayerDead();
             DamageEffect damage = GetComponent<DamageEffect>();
             damage.Flash();
             movementCounter--;
