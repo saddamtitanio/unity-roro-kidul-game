@@ -500,7 +500,7 @@ MonoBehaviour:
   speakerColorImage: {fileID: 795163607}
   fadeInSpeed: 10
   fadeOutSpeed: 10
-  nextScene: Level4
+  nextScene: EndScene
   gameOverScene: TujuanGame
   dialogue:
   - speakerName: Tomboy Girl

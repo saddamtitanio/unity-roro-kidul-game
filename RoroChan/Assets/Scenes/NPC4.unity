@@ -500,7 +500,7 @@ MonoBehaviour:
   speakerColorImage: {fileID: 795163607}
   fadeInSpeed: 10
   fadeOutSpeed: 10
-  nextScene: Bridge4
+  nextScene: Level5
   gameOverScene: CukupDimengerti
   dialogue:
   - speakerName: Jock Boy
