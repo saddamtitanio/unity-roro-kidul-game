@@ -24,8 +24,8 @@ public class DialogueController : MonoBehaviour
         public bool isChoice;
         public string rightChoiceText;
         public string wrongChoiceText;
-        public Color speakerColor; // New property for speaker color
-        public float speakerNamePosX = 0f; // New property for X position
+        public Color speakerColor; 
+        public float speakerNamePosX = 0f;
     }
 
     [FormerlySerializedAs("dialogueLines")]
@@ -133,11 +133,7 @@ public class DialogueController : MonoBehaviour
     {
         speakerNameText.text = name;
         speakerNameText.color = color;
-
-        // Get the RectTransform component of the speakerNameText
         RectTransform rectTransform = speakerNameText.GetComponent<RectTransform>();
-
-        // Set anchored position based on X position
         rectTransform.anchoredPosition = new Vector2(posX, rectTransform.anchoredPosition.y);
     }
 
